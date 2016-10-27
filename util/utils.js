@@ -76,7 +76,7 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
 		for (var j = 0; j < multicoll; j++) {
 			var coll = sibling_db.getCollection(foo + j);
 			collections.push(coll);
-			//coll.drop();
+			coll.drop();
 		}
 	}
 
