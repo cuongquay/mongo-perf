@@ -148,7 +148,7 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
 			sh.enableSharding("test" + i);
 			for (var j = 0; j < multicoll; j++) {
 				var t = sh.shardCollection("test" + i + "." + collections[(multicoll * i) + j].getName(), {
-					_id : 1
+					user_id : 1
 				});
 			}
 		}
