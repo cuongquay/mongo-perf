@@ -43,9 +43,9 @@ tests.push({
 			"transaction_type_id" : new_guid(),
 			"transactionName" : "playing_game" + getRandom(0, 9),
 			"trans_desc" : "Chơi game",
-			"opening_value" : NumberLong(getRandom(0,50925)),
-			"exchange_value" : NumberLong(-getRandom(0,1000)),
-			"closing_value" : NumberLong(getRandom(0,43925)),
+			"opening_value" : NumberLong(getRandom(0, 50925)),
+			"exchange_value" : NumberLong(-getRandom(0, 1000)),
+			"closing_value" : NumberLong(getRandom(0, 43925)),
 			"reference_id" : new_guid(),
 			"created_time" : new Date().getTime()
 		}
@@ -70,11 +70,29 @@ tests.push({
 		},
 		update : {
 			$inc : {
-				"created_time" : new Date().getTime(),				
-				"opening_value" : NumberLong(getRandom(0,50925)),
-				"exchange_value" : NumberLong(-getRandom(0,1000)),
-				"closing_value" : NumberLong(getRandom(0,43925))
+				"created_time" : new Date().getTime(),
+				"opening_value" : NumberLong(getRandom(0, 50925)),
+				"exchange_value" : NumberLong(-getRandom(0, 1000)),
+				"closing_value" : NumberLong(getRandom(0, 43925))
 			}
+		}
+	}]
+});
+
+/*
+ * Setup: Create collection of documents with only integer _id field
+ * Test: Query for random document based on _id field. Each thread
+ *       accesses a distinct range of documents.
+ */
+tests.push({
+	name : "amun_asset_findOne",
+	tags : ['query', 'regression'],
+	pre : function(collection) {		
+	},
+	ops : [{
+		op : "findOne",
+		query : {
+			assetName : get_asset()
 		}
 	}]
 }); 
