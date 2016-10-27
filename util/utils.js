@@ -69,16 +69,16 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
 
 	var collections = [];
 
-	/*
+	
 	for (var i = 0; i < multidb; i++) {
 		var sibling_db = db.getSiblingDB('test' + i);
 		var foo = test.name.replace(/\./g, "_");
 		for (var j = 0; j < multicoll; j++) {
 			var coll = sibling_db.getCollection(foo + j);
 			collections.push(coll);
-			coll.drop();
+			//coll.drop();
 		}
-	}*/
+	}
 
 	var new_ops = [];
 
