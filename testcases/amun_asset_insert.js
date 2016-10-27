@@ -16,7 +16,7 @@ function getRandom(min, max) {
 }
 
 function get_asset() {
-	return arr[getRandom(0, 2)];
+	return arr[parseInt(getRandom(0, 2))];
 }
 
 /*
