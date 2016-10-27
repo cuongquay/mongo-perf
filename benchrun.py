@@ -97,6 +97,9 @@ def parse_arguments():
     parser.add_argument('--printArgs', dest='printArgs', nargs='?', const='true',
                         choices=['true','false'], default='false',
                         help='Print the benchrun args before running the test.')
+    parser.add_argument('--cleanUp', dest='cleanUp', nargs='?', const='true',
+                        choices=['true','false'], default='false',
+                        help='Clean up databases after running the test.')
     return parser
 
 
@@ -187,7 +190,8 @@ def main():
               str(args.shard) + ", " +
               str(json.dumps(crud_options)) + ", " + 
               str(args.excludeTestbed) + "," + 
-              str(args.printArgs) + 
+              str(args.printArgs) + "," +
+              str(args.cleanUp) +  
               ");\n")
     mongo_proc.stdin.write(cmdstr)
     print cmdstr
