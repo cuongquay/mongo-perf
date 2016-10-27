@@ -26,7 +26,7 @@ function get_asset() {
  *
  */
 tests.push({
-	name : "amun_asset",
+	name : "amun_asset_insert",
 	tags : ['insert', 'core'],
 	pre : function(collection) {
 	},
@@ -41,13 +41,40 @@ tests.push({
 			"assetName" : get_asset(),
 			"application_id" : new_guid(),
 			"transaction_type_id" : new_guid(),
-			"transactionName" : "playing_game" + getRandom(0,9),
+			"transactionName" : "playing_game" + getRandom(0, 9),
 			"trans_desc" : "Chơi game",
-			"opening_value" : NumberLong(50925),
-			"exchange_value" : NumberLong(-7000),
-			"closing_value" : NumberLong(43925),
+			"opening_value" : NumberLong(getRandom(0,50925)),
+			"exchange_value" : NumberLong(-getRandom(0,1000)),
+			"closing_value" : NumberLong(getRandom(0,43925)),
 			"reference_id" : new_guid(),
 			"created_time" : new Date().getTime()
 		}
 	}]
 });
+
+/*
+ * Setup: Populate a collection with an integer field X set to 0
+ *        and integer _id field
+ * Test:  Each thread works in a range of 100 documents; randomly selects a
+ *        document based on the integer _id field and increments X
+ */
+tests.push({
+	name : "amun_asset_update",
+	tags : ['update', 'regression'],
+	pre : function(collection) {
+	},
+	ops : [{
+		op : "update",
+		query : {
+			assetName : get_asset()
+		},
+		update : {
+			$inc : {
+				"created_time" : new Date().getTime(),				
+				"opening_value" : NumberLong(getRandom(0,50925)),
+				"exchange_value" : NumberLong(-getRandom(0,1000)),
+				"closing_value" : NumberLong(getRandom(0,43925))
+			}
+		}
+	}]
+}); 
